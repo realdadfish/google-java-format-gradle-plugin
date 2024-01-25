@@ -6,6 +6,7 @@ plugins {
     id "com.github.sherter.google-java-format" version '0.9'
 }
 
+group = 'com.github.sherter.googlejavaformatgradleplugin'
 version = file('src/main/resources/VERSION').text.trim()
 
 repositories {
@@ -99,14 +100,6 @@ gradlePlugin {
 }
 
 publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId 'com.github.sherter.googlejavaformatgradleplugin'
-            artifactId 'google-java-format-gradle-plugin'
-
-            project.shadow.component(it)
-        }
-    }
     if (version.endsWith('-SNAPSHOT')) {
         repositories {
             maven {
