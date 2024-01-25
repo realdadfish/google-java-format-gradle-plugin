@@ -68,7 +68,7 @@ class OneDotOneFactory extends AbstractFormatterFactory {
     @CompileStatic(TypeCheckingMode.SKIP)
     protected Closure<String> constructRemoveUnusedImportsClosure() {
         def clazz = classLoader.loadClass(removeUnusedImportsClassName)
-        def remover = clazz.newInstance()
+        def remover = clazz.getDeclaredConstructor().newInstance()
         def javadocOnlyImports = constructJavadocOnlyImports()
         return { String source ->
             remover.removeUnusedImports(source, javadocOnlyImports)

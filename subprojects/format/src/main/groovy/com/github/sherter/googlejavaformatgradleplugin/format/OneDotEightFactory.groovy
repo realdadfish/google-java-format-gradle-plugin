@@ -18,7 +18,7 @@ final class OneDotEightFactory extends OneDotOneFactory {
     @Override
     Closure<String> constructRemoveUnusedImportsClosure() {
         def clazz = classLoader.loadClass(removeUnusedImportsClassName)
-        def remover = clazz.newInstance()
+        def remover = clazz.getDeclaredConstructor().newInstance()
         return { String source ->
             remover.removeUnusedImports(source)
         }

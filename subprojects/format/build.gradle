@@ -23,6 +23,17 @@ dependencies {
   testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
+tasks.withType(JavaCompile.class).configureEach {
+  options.compilerArgs.addAll([
+    "--add-exports", "jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED",
+    "--add-exports", "jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED",
+    "--add-exports", "jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED",
+    "--add-exports", "jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED",
+    "--add-exports", "jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED",
+    "--add-exports", "jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED"
+  ])
+}
+
 test {
   // download google-java-format and transitive dependencies to $buildDir/grapes
   systemProperty 'maven.repo.local', layout.buildDirectory.dir("local-maven-repository").get().asFile.toString()
