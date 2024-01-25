@@ -19,9 +19,11 @@ dependencies {
   testImplementation 'org.apache.maven.resolver:maven-resolver-transport-file:1.9.18'
   testImplementation 'org.apache.maven.resolver:maven-resolver-transport-http:1.9.18'
   testImplementation 'org.slf4j:slf4j-nop:2.0.11'
+  testImplementation platform('org.junit:junit-bom:5.9.0')
+  testImplementation 'org.junit.jupiter:junit-jupiter-api'
 }
 
 test {
   // download google-java-format and transitive dependencies to $buildDir/grapes
-  systemProperty 'maven.repo.local', layout.buildDirectory.dir("local-maven-repository").get()
+  systemProperty 'maven.repo.local', layout.buildDirectory.dir("local-maven-repository").get().asFile.toString()
 }
