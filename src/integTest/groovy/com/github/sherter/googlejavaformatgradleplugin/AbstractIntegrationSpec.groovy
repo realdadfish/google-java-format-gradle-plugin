@@ -3,10 +3,11 @@ package com.github.sherter.googlejavaformatgradleplugin
 import com.github.sherter.googlejavaformatgradleplugin.format.Gjf
 import com.github.sherter.googlejavaformatgradleplugin.test.Project
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
+import org.junit.jupiter.api.io.TempDir
 import spock.lang.Specification
 import spock.util.environment.Jvm
+
+import java.nio.file.Path
 
 abstract class AbstractIntegrationSpec extends Specification {
 
@@ -44,16 +45,15 @@ abstract class AbstractIntegrationSpec extends Specification {
         |}
         |""".stripMargin() : ''
 
-    @Rule
-    TemporaryFolder temporaryFolder
+    @TempDir Path temporaryFolder
     GradleRunner runner
     Project project
 
     def setup() {
         runner = GradleRunner.create()
                 .withGradleVersion(System.properties['GRADLE_VERSION'])
-                .withProjectDir(temporaryFolder.root)
-        project = new Project(temporaryFolder.root)
+                .withProjectDir(temporaryFolder.toFile())
+        project = new Project(temporaryFolder.toFile())
         additionalSetup()
     }
 
