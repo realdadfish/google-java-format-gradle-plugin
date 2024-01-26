@@ -33,6 +33,7 @@ class GoogleJavaFormatPlugin implements Plugin<Project> {
     @Override
     void apply(Project project) {
         this.project = project
+        ModuleHelper.doOpenInternalPackagesIfRequired();
         createExtension()
         createDefaultTasks()
 
